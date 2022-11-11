@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+/* root farve for body og movies */
+:root{
+    --primary-color:#000000;
+    --secondary-color: #662222;
+}
+
+body{
+    background-color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+/* search bar og header styling*/
+header{
+    padding:1rem;
+    display:flex;
+    justify-content: center;
+    background-color: var(--secondary-color);
+}
+
+h3{
+    color: white;
+    text-align: center;
+}
+p{
+    color: white;
+    text-align: center;
+}
+/*  styling af overview på titel */
+.movietitle{
+    color: #a11f1f;
+}
+
+/* search form styling  */
+.search{
+    background-color: rgba(0,0,0,1);
+    border: 2px solid var(--primary-color);
+    padding:0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    color:#fff;
+    font-family: inherit;
+}
+
+.search:focus{
+    outline:0;
+    background-color: var(--primary-color);
+}
+
+.search::placeholder{
+    color: #ffffff;
+}
+.titeldiv{
+    background-color: var(--secondary-color) !important;
+}
+/* movies style med flexbox */
+main{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+/* rød border styling */
+.movie {
+    width: 300px;
+    margin: 1rem;
+    border-radius: 3px;
+    box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
+    background-color: var(--secondary-color);
+    position:relative;
+    overflow: hidden;
+}
+
+/* movie img styling */
+.movie img{
+    width:100%;
+}
+/* stream ikoner flex to center */
+.tjenester{
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+}
+/* stream ikoner img style*/
+.streamikon{
+    max-height: 100px;
+    max-width: 100px;
+    margin: auto;
+    border-radius: 10px;
+}
+/* imdb border og font styling*/
+.score{
+    border-radius: 10px;
+    font-size: 1.6em;
+    margin-bottom: 60px;
+}
+
+/* imdb color styling og posistion */
+.movie-info{
+    color:#eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
+    margin: 0;
+    position: absolute;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.movie-info h3{
+    margin-top: 0;
+}
+
+.movie-info span{
+    background-color: var(--primary-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.movie-info span.green{
+    color:lightgreen;
+}
+
+.movie-info span.orange{
+    color:orange;
+}
+
+.movie-info span.red{
+    color:red;
+}
+
+/* overview når der hover, movie styling */
+.overview{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color: black;
+    color: #fff;
+    padding: 1rem;
+    max-height: 100%;
+    transform:translateY(101%);
+    transition:transform 0.3s ease-in;
+}
+
+.movie:hover .overview{
+    transform:translateY(0);
+    overflow-y: scroll;
+}
+/* genre styling til center og color styling */
+#tags{
+    width:80%;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+}
+
+.tag{
+    color:white;
+    padding:10px 20px;
+    background-color: rgb(163, 60, 47);
+    border-radius: 50px;
+    margin:5px;
+    display:inline-block;
+    cursor: pointer;
+}
+
+.tag.highlight{
+    background-color: rgb(43, 43, 43);
+    color: red;
+}
+.no-results{
+    color:white;
+}
+/* pagnation styling og positioning */
+.pagination{
+    display:flex;
+    margin:10px 30px;
+    align-items: center;
+    justify-content: center;
+    color:white;
+}
+
+.page{
+    padding:20px;
+    cursor:pointer;
+}
+
+.page.disabled{
+    cursor:not-allowed;
+    color:grey;
+}
+
+.current{
+    padding: 10px 20px;
+    border-radius: 50%;
+    border: 5px solid #662222;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+/* trailer button styling  */
+.know-more{
+    background-color: #662222;
+    color:white;
+    font-size: 16px;
+    font-weight: bold;
+    border:0;
+    border-radius: 50px;
+    padding: 10px 20px;
+    margin-top: 5px;
+}
+/* Overlay (baggrund trailers) */
+.overlay {
+    /* Height & width  */   
+    height: 100%;
+    width: 0;
+    position: fixed; /* trailer position */
+    z-index: 1; /* z indeks så trailer sider før siden */
+    left: 0;
+    top: 0;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden; /* ingen horizont scroll */
+    transition: 0.5s; /* 0.5 sec transition animation */
+  }
+  
+  /* Position af content i  overlay */
+  .overlay-content {
+    position: relative;
+    top: 10%; 
+    width: 100%; 
+    text-align: center; 
+    margin-top: 30px; 
+  }
+  
+  /*  navigation link i overlay */
+  .overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #ffffff;
+    display: block; /* Display block instead of inline */
+    transition: 0.3s; /* Transition effects on hover (color) */
+  }
+  
+  /* navigation farve ved hover */
+  .overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+    
+  }
+  
+  /* lukke  knap/kryds position */
+  .overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+  }
+  
+  /* lukke knap og tekst media querie gøre tekst mindre */
+  @media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+      font-size: 40px;
+      top: 15px;
+      right: 35px;
+    }
+  }
+
+/* gemmer trailer hvis der flere end 1*/
+  .embed.hide{
+      display: none;
+  }
+/* viser trailer */
+  .embed.show{
+      display: inline-block;
+  }
+/* pil i overlay styling*/
+  .arrow{
+      position: absolute;
+      font-size: 40px;
+  }
+
+  .arrow.left-arrow{
+      top:50%;
+      left:5%;
+      transform: translateY(-50%);
+  }
+
+  
+  .arrow.right-arrow{
+    top:50%;
+    transform: translateY(-50%);
+    right:5%;
+}
+/* nummer i overlay styling*/
+.dots{
+    margin-top: 30px;
+}
+
+.dots .dot {
+    padding: 5px 15px;
+    border-radius: 50%;
+    border: 5px solid var(--secondary-color);
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 5px;
+}
+
+.dots .dot.active{
+    border-color: orange;
+}
